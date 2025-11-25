@@ -8,7 +8,7 @@
 * Если процесс был перезапущен, писать в лог /var/log/monitoring.log (если процесс не запущен, то ничего не делать)
 * Если сервер мониторинга не доступен, так же писать в лог.
 
-# test-monitor решение
+# test-monitor решение 1
 
 1. Bash-скрипт:  
   ```  
@@ -35,5 +35,29 @@
   ```
   systemctl status test-monitor.timer
   journalctl -u test-monitor.service
+  ```
+# test-monitor решение 2
+
+1. Bash-скрипт, который сам работает в вечном цикле, выполняет проверку каждую минуту:  
+  ```  
+  /usr/local/bin/test-monitor2.sh
+  ```  
+2. Права на выполнение:  
+  ```  
+  sudo chmod +x /usr/local/bin/test-monitor2.sh
+  ```
+3. Systemd unit без таймера с автоматическим стартом:  
+  ```  
+  /etc/systemd/system/test-monitor2.service
+  ```
+4. Включение и запуск мониторинга:  
+  ```
+  sudo systemctl daemon-reload
+  sudo systemctl enable --now test-monitor2.service
+  ```
+5.Проверка:  
+  ```
+  systemctl status test-monitor2.service
+  journalctl -u test-monitor2.service -f
   ```
 ![Mon](https://www.marketresearchintellect.com/images/blogs/market-insights-growth-drivers-in-network-performance-monitoring-software.webp)
