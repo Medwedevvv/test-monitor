@@ -1,0 +1,13 @@
+[Unit]
+Description=Monitoring of process test
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/test-monitor2.sh
+Restart=always
+RestartSec=10
+User=root
+
+[Install]
+WantedBy=multi-user.target
