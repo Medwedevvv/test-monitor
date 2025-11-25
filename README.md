@@ -55,7 +55,7 @@
   sudo systemctl daemon-reload
   sudo systemctl enable --now test-monitor2.service
   ```
-5.Проверка:  
+5. Проверка:  
   ```
   systemctl status test-monitor2.service
   journalctl -u test-monitor2.service -f
